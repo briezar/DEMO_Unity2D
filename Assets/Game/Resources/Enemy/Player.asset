@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeebc7447d3f58c4dbf80f976b307ab3, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  enemyName: Player
+  description: 
+  frontSprite: {fileID: -4445699719359273135, guid: 3111f23cd57d2be48b2ee6bac4a23588, type: 3}
+  maxHp: 100
+  attack: 30
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 7ceed70a4b272a04c9078e272ac4ad91, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: fa5c0c2a5fd5aa14080fa3e463a6bce4, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 290f99c36a461b34a9cf8b92421f2d9e, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 4350a31b3e3792f4681e6aa77e6a15b9, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 5a02ad40896e50c489db208db24c02cf, type: 2}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: 80ae742c4fd01e340944894ca54447c4, type: 2}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: dd2e2957b279512468301b470c7468df, type: 2}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: d58d77501edbb9640870b9922693b867, type: 2}
+    level: 0
