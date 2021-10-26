@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy }
@@ -28,6 +27,10 @@ public class BattleSystem : MonoBehaviour
     public void StartBattle()
     {
         StartCoroutine(SetupBattle());
+        currentAction = 0;
+        dialogBox.UpdateActionSelection(currentAction);
+        currentMove = 0;
+        dialogBox.UpdateMoveSelection(currentMove, playerUnit.Enemy.MovesList[currentMove]);
     }
 
     public IEnumerator SetupBattle()
@@ -48,6 +51,9 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(enemyUnitDog.PlayDogAnim("idle"));
 
             dialogBox.SetMoveNames(playerUnit.Enemy.MovesList);
+            numOfFeedDog = 0;
+            isFeedingDog = false;
+
             yield return dialogBox.TypeDialog("You found the man's dog!");
         }
         else
@@ -128,6 +134,7 @@ public class BattleSystem : MonoBehaviour
             }
             yield return new WaitForSeconds(2f);
             OnBattleOver(true);
+
             BattleHUD.isDog = false;
 
         }
@@ -164,17 +171,17 @@ public class BattleSystem : MonoBehaviour
 
         else if (isFeedingDog)
         {
+            isFeedingDog = false;
+
             if ((UnityEngine.Random.Range(0, 10) < 7) && numOfFeedDog < 3)
             {
                 move = enemyUnitDog.Enemy.MovesList[3];
-                isFeedingDog = false;
                 numOfFeedDog++;
                 enemyUnitDog.Enemy.TakeDamage(40);
                 yield return enemyHUD.UpdateHP(true);
             }
             else
             {
-                isFeedingDog = false;
                 yield return dialogBox.TypeDialog("The dog does not want to eat.");
                 yield return new WaitForSeconds(1f);
             }
@@ -233,7 +240,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.PlayerAction)
         {
-            ActionSelect();
+            ActionSelect();        
         }
         else if (state == BattleState.PlayerMove)
         {
@@ -265,7 +272,8 @@ public class BattleSystem : MonoBehaviour
 
             if (currentAction == 1)
             {
-                //Run
+                OnBattleOver(false);
+                BattleHUD.isDog = false;
             }
         }
     }
