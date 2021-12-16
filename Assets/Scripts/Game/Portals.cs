@@ -5,13 +5,19 @@ using UnityEngine;
 public class Portals : MonoBehaviour
 {
     [SerializeField] private Transform endPos;
-
-    public static Portals Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
+    [SerializeField] private AudioClip bgmToPlay;
+    [SerializeField] private AudioClip sfxToPlay;
 
     public Transform EndPos => endPos;
+
+    public void PlayEnterBGM()
+    {
+        if (bgmToPlay == null) return;
+        SoundManager.Instance.PlayBGM(bgmToPlay);
+    }
+
+    public void PlayEnterSFX()
+    {
+        if (sfxToPlay != null) SoundManager.Instance.PlaySFX(sfxToPlay);
+    }
 }

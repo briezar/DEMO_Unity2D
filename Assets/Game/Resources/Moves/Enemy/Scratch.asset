@@ -16,3 +16,4 @@ MonoBehaviour:
   description: "Scratches the foe with sharp claws.\r"
   power: 55
   accuracy: 75
+  moveSFX: {fileID: 8300000, guid: 86a45fd45a48a4e449090c0fab23c575, type: 3}

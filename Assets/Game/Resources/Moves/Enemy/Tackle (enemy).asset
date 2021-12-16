@@ -16,3 +16,4 @@ MonoBehaviour:
   description: "Charges the foe with a full-body tackle.\r"
   power: 45
   accuracy: 85
+  moveSFX: {fileID: 8300000, guid: 86a45fd45a48a4e449090c0fab23c575, type: 3}

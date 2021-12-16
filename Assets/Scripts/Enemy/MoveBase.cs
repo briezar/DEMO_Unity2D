@@ -12,7 +12,9 @@ public class MoveBase : ScriptableObject
 
     [SerializeField] private int power;
     [SerializeField] private int accuracy;
+    [SerializeField] private AudioClip moveSFX;
 
+    public AudioClip MoveSFX => moveSFX;
     public string MoveName => moveName;
     public string Description => description;
     public int Power => power;

@@ -16,3 +16,4 @@ MonoBehaviour:
   description: A quick slash with the sword.
   power: 40
   accuracy: 85
+  moveSFX: {fileID: 8300000, guid: 32b03e37c18ef01469ebe49226b68668, type: 3}

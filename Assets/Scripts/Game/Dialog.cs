@@ -10,4 +10,6 @@ public class Dialog
 
     public List<string> Lines => lines;
 
+
+
 }

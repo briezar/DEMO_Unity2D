@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Bites at the foe.
   power: 35
   accuracy: 95
+  moveSFX: {fileID: 8300000, guid: 86a45fd45a48a4e449090c0fab23c575, type: 3}

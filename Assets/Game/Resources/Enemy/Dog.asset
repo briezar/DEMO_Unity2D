@@ -17,6 +17,8 @@ MonoBehaviour:
   frontSprite: {fileID: -7945879476832894141, guid: 973354a0db7d63c439cca4205f4f0973, type: 3}
   maxHp: 200
   attack: 25
+  entrySound: {fileID: 8300000, guid: 03ace9d12639d2847bf773d73ba3f151, type: 3}
+  exitSound: {fileID: 0}
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 533082b0013209149895e5ac1903541e, type: 2}
     level: 0

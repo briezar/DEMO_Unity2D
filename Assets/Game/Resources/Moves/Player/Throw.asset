@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Throw a rock at the foe, powerful but easy to miss.
   power: 60
   accuracy: 65
+  moveSFX: {fileID: 8300000, guid: c947e7745d431eb4298065883fc14aa4, type: 3}

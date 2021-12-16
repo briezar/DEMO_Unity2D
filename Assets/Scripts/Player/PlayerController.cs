@@ -11,10 +11,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask portalLayer;
 
     [SerializeField] private Transform player;
+    [SerializeField] private GameObject exclamationMark;
+
+    [SerializeField] private AudioClip battleTheme;
+
+    [SerializeField] private AudioClip walk_1_SFX;
+    [SerializeField] private AudioClip walk_2_SFX;
+    [SerializeField] private AudioClip encounterSFX;
+
 
     public event Action OnEncountered;
 
     private bool isMoving;
+    private bool canMove = true;
     private Vector2 input;
     private Animator animator;
 
@@ -25,6 +34,13 @@ public class PlayerController : MonoBehaviour
 
     public void HandleUpdate()
     {
+        if (Time.timeScale == 0) return;
+        if (!canMove)
+        {
+            animator.SetBool("isMoving", false);
+            return;
+        }
+
         Vector2 prevFacingDir = new Vector2(animator.GetFloat("input.x"), animator.GetFloat("input.y"));
 
         if (!isMoving)
@@ -76,7 +92,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
 
         CheckForEncounters();
-        CheckForPortal();
+        StartCoroutine(CheckForPortal());
     }
 
     private bool IsWalkable(Vector3 targetPos)
@@ -87,13 +103,19 @@ public class PlayerController : MonoBehaviour
             return true;
     }
 
-    private void CheckForPortal()
+    private IEnumerator CheckForPortal()
     {
         Collider2D collider = Physics2D.OverlapCircle(player.position, 0.2f, portalLayer);
         if (collider != null)
         {
-            player.localPosition = Portals.Instance.EndPos.localPosition;
-            //player.localPosition = new Vector3(player.localPosition.x - 0.5f, player.localPosition.y);
+            canMove = false;
+            collider.GetComponent<Portals>().PlayEnterSFX();
+
+            yield return Fader.Instance.FadeIn(0.5f);
+            collider.GetComponent<Portals>().PlayEnterBGM();
+            player.localPosition = collider.GetComponent<Portals>().EndPos.localPosition;
+            yield return Fader.Instance.FadeOut(0.5f);
+            canMove = true;
         }
 
 
@@ -106,9 +128,29 @@ public class PlayerController : MonoBehaviour
             if (UnityEngine.Random.Range(0, 100) <= 10)
             {
                 animator.SetBool("isMoving", false);
-                OnEncountered();
+                StartCoroutine(OnEncounteredAnimation());
             }
         }
+    }
+
+    private IEnumerator OnEncounteredAnimation()
+    {
+        canMove = false;
+        SoundManager.Instance.PlaySFX(encounterSFX);
+        exclamationMark.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.Instance.PlayBGM(battleTheme);
+        for (int i = 0; i < 2; i++)
+        {
+            yield return Fader.Instance.FadeIn(0.15f);
+            yield return Fader.Instance.FadeOut(0.15f);
+        }
+        yield return Fader.Instance.FadeIn(0.15f);
+        yield return new WaitForSeconds(1f);
+        OnEncountered();
+        StartCoroutine(Fader.Instance.FadeOut(0.5f));
+        exclamationMark.SetActive(false);
+        canMove = true;
     }
 
     private void Interact()
@@ -123,12 +165,14 @@ public class PlayerController : MonoBehaviour
             {
                 if (collider.TryGetComponent<IInteractable>(out var interactable))
                 {
-                    interactable.Interact();
+                    animator.SetBool("isMoving", false);
+                    interactable.Interact(facingDir);
+                    
                     break;
                 }
             }
         }
-    
+
     }
 
     IEnumerator FaceNewDirection(float time)
@@ -137,5 +181,15 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(time);
         isMoving = false;
 
+    }
+
+    public void PlayWalk1()
+    {
+        SoundManager.Instance.PlaySFX(walk_1_SFX);
+    }
+
+    public void PlayWalk2()
+    {
+        SoundManager.Instance.PlaySFX(walk_2_SFX);
     }
 }

@@ -14,8 +14,8 @@ public class BattleHUD : MonoBehaviour
 
     public static bool isDog;
 
-    private Enemy enemy;
-    private Enemy player;
+    private BattleUnitData enemy;
+    private BattleUnitData player;
 
     private Vector3 originalPos;
 
@@ -24,10 +24,10 @@ public class BattleHUD : MonoBehaviour
         originalPos = transform.localPosition;
     }
 
-    public IEnumerator SetEnemyData(Enemy enemy)
+    public IEnumerator SetEnemyData(BattleUnitData enemy)
     {
         this.enemy = enemy;
-        nameText.text = enemy.EnemyBase.EnemyName;
+        nameText.text = enemy.BattleUnitBase.EnemyName;
 
         if (isDog)
         {
@@ -43,7 +43,7 @@ public class BattleHUD : MonoBehaviour
         }
     }
 
-    public IEnumerator SetPlayerData(Enemy player)
+    public IEnumerator SetPlayerData(BattleUnitData player)
     {
         this.player = player;
         if (isDog) barText.text = "Patience";
