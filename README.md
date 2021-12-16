@@ -19,6 +19,6 @@ The game I submitted as my end-term project for the Unity 2D module at Green IT 
 
 ## 🛑 *Development process stopped at finishing befriending the dog*
 
-![Interact with NPC](Unity2D-Project-exe/pic1.jpg)
-![Enemy with simple AI](Unity2D-Project-exe/pic2.jpg)
-![End of development](Unity2D-Project-exe/pic3.jpg)
+![Interact with NPC](DEMO_A_New_Adventure/pic1.jpg)
+![Enemy with simple AI](DEMO_A_New_Adventure/pic2.jpg)
+![End of development](DEMO_A_New_Adventure/pic3.jpg)
