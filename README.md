@@ -17,7 +17,7 @@ The game I submitted as my end-term project for the Unity 2D module at Green IT 
 - Menu system
 - Audio
 
-## 🛑 *Development process stopped at finishing befriending the dog*
+## 🛑 *Development process stopped at returning the dog to its owner*
 
 ![Interact with NPC](DEMO_A_New_Adventure/pic1.jpg)
 ![Enemy with simple AI](DEMO_A_New_Adventure/pic2.jpg)
