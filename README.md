@@ -8,7 +8,7 @@ The game I submitted as my end-term project for the Unity 2D module at Green IT 
 ## 🕹 Controls:
 - **WASD** for movement and choosing options
 - **Enter** for interact (talk), select option
-- **Esc** for exit
+- **Esc** for opening Option menu
 
 ## 🎮 Features:
 - Controlled Random encounter
