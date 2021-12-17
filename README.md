@@ -19,6 +19,8 @@ The game I submitted as my end-term project for the Unity 2D module at Green IT 
 
 ## 🛑 *Development process stopped at returning the dog to its owner*
 
+Demo video: https://youtu.be/SK5axNjGQiY
+
 ![Interact with NPC](DEMO_A_New_Adventure/pic1.jpg)
 ![Enemy with simple AI](DEMO_A_New_Adventure/pic2.jpg)
-![End of development](DEMO_A_New_Adventure/pic3.jpg)
+![Dog battle](DEMO_A_New_Adventure/pic3.jpg)
