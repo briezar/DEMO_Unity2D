@@ -8,7 +8,7 @@ The game I submitted as my end-term project for the Unity 2D module at Green IT 
 ## 🕹 Controls:
 - **WASD** for movement and choosing options
 - **Enter** for interact (talk), select option
-- **Esc** for exit
+- **Esc** for opening Option menu
 
 ## 🎮 Features:
 - Controlled Random encounter
@@ -18,8 +18,10 @@ The game I submitted as my end-term project for the Unity 2D module at Green IT 
 - Audio
 - Now supports "cheat" control. Press L to reduce enemy health, press P to reduce player health.
 
-## 🛑 *Development process stopped at finishing befriending the dog*
+## 🛑 *Development process stopped at returning the dog to its owner*
 
-![Interact with NPC](Unity2D-Project-exe/pic1.jpg)
-![Enemy with simple AI](Unity2D-Project-exe/pic2.jpg)
-![End of development](Unity2D-Project-exe/pic3.jpg)
+Demo video: https://youtu.be/SK5axNjGQiY
+
+![Interact with NPC](DEMO_A_New_Adventure/pic1.jpg)
+![Enemy with simple AI](DEMO_A_New_Adventure/pic2.jpg)
+![Dog battle](DEMO_A_New_Adventure/pic3.jpg)
