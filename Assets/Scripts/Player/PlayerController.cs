@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Transform player;
     [SerializeField] private GameObject exclamationMark;
-
     [SerializeField] private AudioClip battleTheme;
 
     [SerializeField] private AudioClip walk_1_SFX;
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public event Action OnEncountered;
 
     private bool isMoving;
-    private bool canMove = true;
+    public static bool canMove = true;
     private Vector2 input;
     private Animator animator;
 
@@ -111,10 +110,13 @@ public class PlayerController : MonoBehaviour
             canMove = false;
             collider.GetComponent<Portals>().PlayEnterSFX();
 
+            GameManager.Instance.SetActiveOptionButton(false);
             yield return Fader.Instance.FadeIn(0.5f);
             collider.GetComponent<Portals>().PlayEnterBGM();
             player.localPosition = collider.GetComponent<Portals>().EndPos.localPosition;
             yield return Fader.Instance.FadeOut(0.5f);
+            GameManager.Instance.SetActiveOptionButton(true);
+
             canMove = true;
         }
 
@@ -136,6 +138,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator OnEncounteredAnimation()
     {
         canMove = false;
+        GameManager.Instance.SetActiveOptionButton(false);
         SoundManager.Instance.PlaySFX(encounterSFX);
         exclamationMark.SetActive(true);
         yield return new WaitForSeconds(0.5f);

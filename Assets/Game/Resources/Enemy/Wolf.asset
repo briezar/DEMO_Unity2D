@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeebc7447d3f58c4dbf80f976b307ab3, type: 3}
   m_Name: Wolf
   m_EditorClassIdentifier: 
-  enemyName: Wolf
+  unitName: Wolf
   description: A fierce wolf.
   frontSprite: {fileID: 21300000, guid: 0601edc86bbfddc45a4522b304695ecf, type: 3}
   maxHp: 100

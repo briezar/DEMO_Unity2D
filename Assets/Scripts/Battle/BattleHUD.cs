@@ -27,7 +27,7 @@ public class BattleHUD : MonoBehaviour
     public IEnumerator SetEnemyData(BattleUnitData enemy)
     {
         this.enemy = enemy;
-        nameText.text = enemy.BattleUnitBase.EnemyName;
+        nameText.text = enemy.BattleUnitBase.UnitName;
 
         if (isDog)
         {

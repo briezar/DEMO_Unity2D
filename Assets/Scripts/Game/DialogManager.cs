@@ -61,12 +61,15 @@ public class DialogManager : MonoBehaviour
                 currentLine = 0;
                 dialogBox.SetActive(false);
                 OnCloseDialog?.Invoke();
-                if (BattleHUD.isDog) OnMeetDog();
-                
+                if (BattleHUD.isDog)
+                {
+                    OnMeetDog();
+                }
             }
 
         }
     }
+
     public IEnumerator ShowDialog(Dialog dialog, bool hasName)
     {
         yield return new WaitForEndOfFrame();

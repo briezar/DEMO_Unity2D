@@ -41,7 +41,7 @@ public class BattleSystem : MonoBehaviour
         currentAction = 0;
         dialogBox.UpdateActionSelection(currentAction);
         currentMove = 0;
-        dialogBox.UpdateMoveSelection(currentMove, playerUnit.Enemy.MovesList[currentMove]);
+        dialogBox.UpdateMoveSelection(currentMove, playerUnit.BattleUnitData.MovesList[currentMove]);
     }
 
     public IEnumerator SetupBattle()
@@ -50,19 +50,19 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableMoveSelector(false);
 
         playerUnit.Setup();
-        StartCoroutine(playerHUD.SetPlayerData(playerUnit.Enemy));
+        StartCoroutine(playerHUD.SetPlayerData(playerUnit.BattleUnitData));
         playerHUD.PlayEnterAnim();
 
-        dialogBox.SetMoveNames(playerUnit.Enemy.MovesList);
+        dialogBox.SetMoveNames(playerUnit.BattleUnitData.MovesList);
 
         enemyUnit.gameObject.SetActive(!BattleHUD.isDog);
         enemyUnitDog.gameObject.SetActive(BattleHUD.isDog);
-        dialogBox.SetMoveNames(playerUnit.Enemy.MovesList);
+        dialogBox.SetMoveNames(playerUnit.BattleUnitData.MovesList);
 
         if (BattleHUD.isDog)
         {
             enemyUnitDog.Setup();
-            StartCoroutine(enemyHUD.SetEnemyData(enemyUnitDog.Enemy));
+            StartCoroutine(enemyHUD.SetEnemyData(enemyUnitDog.BattleUnitData));
             enemyHUD.PlayEnterAnim();
             StartCoroutine(enemyUnitDog.PlayDogAnim("idle"));
 
@@ -74,12 +74,14 @@ public class BattleSystem : MonoBehaviour
         else
         {
             enemyUnit.Setup();
-            StartCoroutine(enemyHUD.SetEnemyData(enemyUnit.Enemy));
+            StartCoroutine(enemyHUD.SetEnemyData(enemyUnit.BattleUnitData));
             enemyHUD.PlayEnterAnim();
 
-            yield return dialogBox.TypeDialog($"A wild {enemyUnit.Enemy.BattleUnitBase.EnemyName} appeared!");
+            yield return dialogBox.TypeDialog($"A wild {enemyUnit.BattleUnitData.BattleUnitBase.UnitName} appeared!");
         }
         yield return new WaitForSeconds(1.5f);
+        GameManager.Instance.SetActiveOptionButton(true);
+
         canSelect = true;
         PlayerAction();
     }
@@ -103,7 +105,7 @@ public class BattleSystem : MonoBehaviour
     private IEnumerator PerformPlayerMove()
     {
         state = BattleState.Busy;
-        var move = playerUnit.Enemy.MovesList[currentMove];
+        var move = playerUnit.BattleUnitData.MovesList[currentMove];
         yield return dialogBox.TypeDialog($"Player used {move.MoveBase.MoveName}");
 
         playerUnit.PlayDOTweenAttackAnim();
@@ -131,7 +133,7 @@ public class BattleSystem : MonoBehaviour
                 enemyUnit.PlayHitAnim();
                 SoundManager.Instance.PlaySFX(hitSFX);
             }
-            isDefeated = (BattleHUD.isDog ? enemyUnitDog : enemyUnit).Enemy.TakeDamage(move, playerUnit.Enemy);
+            isDefeated = (BattleHUD.isDog ? enemyUnitDog : enemyUnit).BattleUnitData.TakeDamage(move, playerUnit.BattleUnitData);
             yield return enemyHUD.UpdateHP(true);
         }
         else
@@ -153,7 +155,7 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                yield return dialogBox.TypeDialog($"You defeated the {enemyUnit.Enemy.BattleUnitBase.EnemyName}.");
+                yield return dialogBox.TypeDialog($"You defeated the {enemyUnit.BattleUnitData.BattleUnitBase.UnitName}.");
                 enemyUnit.PlayDefeatedAnim();
             }
 
@@ -170,24 +172,24 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.EnemyMove;
 
-        var move = (BattleHUD.isDog ? enemyUnitDog : enemyUnit).Enemy.GetRandomMove(0, 3);
+        var move = (BattleHUD.isDog ? enemyUnitDog : enemyUnit).BattleUnitData.GetRandomMove(0, 3);
 
         if (isShout)
         {
             if (UnityEngine.Random.Range(0, 10) < 6)
             {
-                enemyUnitDog.Enemy.TakeDamage(40);
+                enemyUnitDog.BattleUnitData.TakeDamage(40);
                 yield return enemyHUD.UpdateHP(true);
                 yield return dialogBox.TypeDialog("You succeeded, but the dog doesn't like it very much.");
             }
             else
             {
-                enemyUnitDog.Enemy.TakeDamage(-20);
+                enemyUnitDog.BattleUnitData.TakeDamage(-20);
                 yield return enemyHUD.UpdateHP(true);
                 yield return dialogBox.TypeDialog("The dog hates you.");
             }
             isShout = false;
-            move = enemyUnitDog.Enemy.GetRandomMove(0, 2);
+            move = enemyUnitDog.BattleUnitData.GetRandomMove(0, 2);
             yield return new WaitForSeconds(1f);
         }
 
@@ -197,9 +199,9 @@ public class BattleSystem : MonoBehaviour
 
             if ((UnityEngine.Random.Range(0, 10) < 7) && numOfFeedDog < 3)
             {
-                move = enemyUnitDog.Enemy.MovesList[3];
+                move = enemyUnitDog.BattleUnitData.MovesList[3];
                 numOfFeedDog++;
-                enemyUnitDog.Enemy.TakeDamage(40);
+                enemyUnitDog.BattleUnitData.TakeDamage(40);
                 yield return enemyHUD.UpdateHP(true);
             }
             else
@@ -209,16 +211,16 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
-        yield return dialogBox.TypeDialog($"{(BattleHUD.isDog ? enemyUnitDog : enemyUnit).Enemy.BattleUnitBase.EnemyName} {move.MoveBase.MoveName}.");
+        yield return dialogBox.TypeDialog($"{(BattleHUD.isDog ? enemyUnitDog : enemyUnit).BattleUnitData.BattleUnitBase.UnitName} {move.MoveBase.MoveName}.");
         move.PlayMoveSFX();
 
         if (BattleHUD.isDog)
-            if (move == enemyUnitDog.Enemy.MovesList[3])
+            if (move == enemyUnitDog.BattleUnitData.MovesList[3])
             {
                 yield return enemyUnitDog.PlayDogAnim("eat");
                 isFeedingDog = false;
             }
-            else if (move == enemyUnitDog.Enemy.MovesList[0])
+            else if (move == enemyUnitDog.BattleUnitData.MovesList[0])
                 yield return enemyUnitDog.PlayDogAnim("sleep");
 
         if (!BattleHUD.isDog) enemyUnit.PlayDOTweenAttackAnim();
@@ -236,7 +238,7 @@ public class BattleSystem : MonoBehaviour
                 playerUnit.PlayHitAnim();
                 SoundManager.Instance.PlaySFX(hitSFX);
             }
-            isDefeated = playerUnit.Enemy.TakeDamage(move, (BattleHUD.isDog ? enemyUnitDog : enemyUnit).Enemy);
+            isDefeated = playerUnit.BattleUnitData.TakeDamage(move, (BattleHUD.isDog ? enemyUnitDog : enemyUnit).BattleUnitData);
             yield return playerHUD.UpdateHP(false);
         }
         else
@@ -262,24 +264,38 @@ public class BattleSystem : MonoBehaviour
 
     private IEnumerator EndBattle(bool isWin)
     {
-        BattleHUD.isDog = false;
         if (!isWin) playerUnit.PlayDefeatedAnim();
+        GameManager.Instance.SetActiveOptionButton(false);
         SoundManager.Instance.StopBGM();
         yield return new WaitForSeconds(2f);
         yield return Fader.Instance.FadeIn(0.3f);
+
+        if (!BattleHUD.isDog && !isWin)  //if isDefeated then reload scene
+        {
+            yield return new WaitForSeconds(2f);
+            LevelManager.Instance.LoadScene(1);
+            yield break;
+        }
         StartCoroutine(Fader.Instance.FadeOut(0.3f));
         OnBattleOver(isWin);
-    }
-    private IEnumerator RunAway()
-    {
-        canSelect = false;
-        yield return dialogBox.TypeDialog("You ran away.");
-        yield return EndBattle(false);
-        canSelect = true;
+        BattleHUD.isDog = false;
+        GameManager.Instance.SetActiveOptionButton(true);
+
     }
 
     public void HandleUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            (BattleHUD.isDog ? enemyUnitDog : enemyUnit).BattleUnitData.TakeDamage(30);
+            StartCoroutine(enemyHUD.UpdateHP(true));
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            playerUnit.BattleUnitData.TakeDamage(30);
+            StartCoroutine(playerHUD.UpdateHP(false));
+        }
+
         if (state == BattleState.PlayerAction)
         {
             ActionSelect();
@@ -326,6 +342,22 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    private IEnumerator RunAway()
+    {
+        canSelect = false;
+        GameManager.Instance.SetActiveOptionButton(false);
+        yield return dialogBox.TypeDialog("You ran away.");
+        playerUnit.PlayDefeatedAnim();
+        SoundManager.Instance.StopBGM();
+        yield return new WaitForSeconds(2f);
+        yield return Fader.Instance.FadeIn(0.3f);
+
+        StartCoroutine(Fader.Instance.FadeOut(0.3f));
+        OnBattleOver(false);
+        BattleHUD.isDog = false;
+        canSelect = true;
+        GameManager.Instance.SetActiveOptionButton(true);
+    }
 
     private void MoveSelect()
     {
@@ -334,7 +366,7 @@ public class BattleSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             SoundManager.Instance.PlaySFX(selectingSFX);
-            if (currentMove < playerUnit.Enemy.MovesList.Count - 1)
+            if (currentMove < playerUnit.BattleUnitData.MovesList.Count - 1)
                 currentMove++;
         }
         else if (Input.GetKeyDown(KeyCode.A))
@@ -346,7 +378,7 @@ public class BattleSystem : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S))
         {
             SoundManager.Instance.PlaySFX(selectingSFX);
-            if (currentMove < playerUnit.Enemy.MovesList.Count - 2)
+            if (currentMove < playerUnit.BattleUnitData.MovesList.Count - 2)
                 currentMove += 2;
         }
         else if (Input.GetKeyDown(KeyCode.W))
@@ -356,7 +388,7 @@ public class BattleSystem : MonoBehaviour
                 currentMove -= 2;
         }
 
-        dialogBox.UpdateMoveSelection(currentMove, playerUnit.Enemy.MovesList[currentMove]);
+        dialogBox.UpdateMoveSelection(currentMove, playerUnit.BattleUnitData.MovesList[currentMove]);
 
         if (Input.GetKeyDown(KeyCode.Return))
         {

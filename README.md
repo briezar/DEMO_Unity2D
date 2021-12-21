@@ -16,6 +16,7 @@ The game I submitted as my end-term project for the Unity 2D module at Green IT 
 - Dialogue system
 - Menu system
 - Audio
+- Now supports "cheat" control. Press L to reduce enemy health, press P to reduce player health.
 
 ## 🛑 *Development process stopped at finishing befriending the dog*
 

@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeebc7447d3f58c4dbf80f976b307ab3, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  enemyName: Player
+  unitName: Player
   description: 
   frontSprite: {fileID: -4445699719359273135, guid: 3111f23cd57d2be48b2ee6bac4a23588, type: 3}
   maxHp: 100
   attack: 30
+  entrySound: {fileID: 0}
+  exitSound: {fileID: 0}
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 7ceed70a4b272a04c9078e272ac4ad91, type: 2}
     level: 1

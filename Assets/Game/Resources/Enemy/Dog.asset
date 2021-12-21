@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeebc7447d3f58c4dbf80f976b307ab3, type: 3}
   m_Name: Dog
   m_EditorClassIdentifier: 
-  enemyName: Dog
+  unitName: Dog
   description: The man's dog.
   frontSprite: {fileID: -7945879476832894141, guid: 973354a0db7d63c439cca4205f4f0973, type: 3}
   maxHp: 200

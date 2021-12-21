@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeebc7447d3f58c4dbf80f976b307ab3, type: 3}
   m_Name: Cobra
   m_EditorClassIdentifier: 
-  enemyName: Cobra
+  unitName: Cobra
   description: A cobra
   frontSprite: {fileID: 21300000, guid: 486b2f44f6c53794781afbb4ee9eb0c1, type: 3}
   maxHp: 90
   attack: 20
+  entrySound: {fileID: 0}
+  exitSound: {fileID: 0}
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 6a1fc873839a5fd41b26c647e33537c9, type: 2}
     level: 0

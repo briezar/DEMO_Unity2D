@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffabcd52d0f63a478280318c9d8843c, type: 3}
   m_Name: Tail Whip
   m_EditorClassIdentifier: 
-  moveName: tail-whips you
-  description: "Charges the foe with a full-body tackle.\r"
+  moveName: whips you with its tail
+  description: 
   power: 50
   accuracy: 90
+  moveSFX: {fileID: 0}
