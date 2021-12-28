@@ -26836,7 +26836,6 @@ GameObject:
   - component: {fileID: 1003718040}
   - component: {fileID: 1003718043}
   - component: {fileID: 1003718042}
-  - component: {fileID: 1003718045}
   - component: {fileID: 1003718044}
   - component: {fileID: 1003718041}
   m_Layer: 0
@@ -26958,18 +26957,6 @@ MonoBehaviour:
   - {fileID: -3632247929719908762, guid: 973354a0db7d63c439cca4205f4f0973, type: 3}
   - {fileID: -3632247929719908762, guid: 973354a0db7d63c439cca4205f4f0973, type: 3}
   - {fileID: -3632247929719908762, guid: 973354a0db7d63c439cca4205f4f0973, type: 3}
---- !u!114 &1003718045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003718039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07ce39b8aa3bc2745a7f6153ffe1eca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1034234354
 GameObject:
   m_ObjectHideFlags: 0
@@ -67591,7 +67578,6 @@ GameObject:
   - component: {fileID: 1656501457}
   - component: {fileID: 1656501456}
   - component: {fileID: 1656501458}
-  - component: {fileID: 1656501459}
   - component: {fileID: 1656501460}
   m_Layer: 0
   m_Name: Player
@@ -67687,18 +67673,6 @@ MonoBehaviour:
   throwObjectSprites:
   - {fileID: 2727136117312835427, guid: 3ae12697ae504414bbf0797ea36dfddd, type: 3}
   - {fileID: 33517161544612487, guid: cb3a56e86b2bb9c4991509ad74cde6ad, type: 3}
---- !u!114 &1656501459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656501454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07ce39b8aa3bc2745a7f6153ffe1eca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1656501460
 MonoBehaviour:
   m_ObjectHideFlags: 0

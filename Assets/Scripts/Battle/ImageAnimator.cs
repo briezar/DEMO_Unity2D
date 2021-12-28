@@ -17,10 +17,11 @@ public class ImageAnimator : MonoBehaviour
 
     private void Awake()
     {
+        OnAwake();
         image = GetComponent<Image>();
     }
 
-    public void Update()
+    private void Update()
     {
         image.SetNativeSize();
         if (timer < 10f) timer += Time.deltaTime;
@@ -41,11 +42,10 @@ public class ImageAnimator : MonoBehaviour
             {
                 image.sprite = frameArray[currentFrame];
             }
-
         }
     }
 
-    public void PlayAnimation(Sprite[] animation, int fps, bool isLooping)
+    protected void PlayAnimation(Sprite[] animation, int fps, bool isLooping)
     {
         frameArray = animation;
         this.fps = fps;
@@ -57,8 +57,13 @@ public class ImageAnimator : MonoBehaviour
         image.sprite = animation[0];
     }
 
-    public void StopPlaying()
+    protected void StopPlaying()
     {
         isPlaying = false;
+    }
+
+    protected virtual void OnAwake()
+    {
+
     }
 }
